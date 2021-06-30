@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\CreatorController;
 use GuzzleHttp\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,17 +28,17 @@ Route::prefix('v1')->group(function(){
         #post manage
         Route::apiResource('post',PostController::class);
 
-        #user logout
-        Route::post('/user/logout',[UserController::class,'logout']);
+        #creator logout
+        Route::post('/creator/logout',[CreatorController::class,'logout']);
     });
 
-    #user login
-    Route::prefix('user')->group(function(){
-        Route::post('/login',[UserController::class,'login']);
-        Route::post('/register',[UserController::class,'register']);
+    #creator login
+    Route::prefix('creator')->group(function(){
+        Route::post('/login',[CreatorController::class,'login']);
+        Route::post('/register',[CreatorController::class,'register']);
     });
 });
 
 Route::get('login',function(){
-    return send_response(false, 'UnAuthinticate User!');
+    return send_response(false, 'UnAuthinticate creator!');
 })->name('login');
