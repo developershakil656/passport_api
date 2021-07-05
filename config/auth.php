@@ -13,8 +13,9 @@ return [
     |
     */
 
+
     'defaults' => [
-        'guard' => 'web',
+        'guard' => 'creator',
         'passwords' => 'creatros',
     ],
 
@@ -36,15 +37,25 @@ return [
     */
 
     'guards' => [
-        'web' => [
+        'creator' => [
             'driver' => 'session',
             'provider' => 'creatros',
         ],
 
-        'api' => [
+        'creator-api' => [
             'driver' => 'passport',
             'provider' => 'creatros',
             'hash' => false,
+        ],
+
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
+    
+        'admin-api' => [
+            'driver' => 'passport',
+            'provider' => 'admins',
         ],
     ],
 
@@ -71,10 +82,10 @@ return [
             'model' => App\Models\Creator::class,
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
+        ],
     ],
 
     /*

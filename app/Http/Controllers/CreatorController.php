@@ -28,13 +28,15 @@ class CreatorController extends Controller
 
         $credentials = $request->only('email','password');
         if (Auth::attempt($credentials)) {
+            // config(['auth.guards.api.provider' => 'creator']);
+
             $creator          = Auth::user();
             $data['creator']  = $creator;
-            $data['token'] = $creator->createToken('creatorToken')->accessToken;
+            $data['token'] = $creator->createToken('AccessToken',['creator'])->accessToken;
 
             return send_response(true, 'You are successfully logged in.',$data);
         } else {
-            return send_response(false, 'something went wrong!',[], 401);
+            return send_response(false, 'email or password are incorrect!',[], 401);
         }
     }
 
